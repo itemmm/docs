@@ -154,3 +154,132 @@ tuple1 = ("hello", "world", "python")
 ## 字典
 使用键-值（key-value）存储，具有极快的查找速度
 
+字典相当于保存了两组数据，其中一组是关键数据，被称为`key`，另一组数据可以通过`key`来访问，被称为`value`
+
+**由于字典中的`key`是非常关键的数据，而且程序需要通过`key`，来访问`value`，因此字典中的`key`不允许重复**
+
+程序既可使用花括号语法来创建字典，也可使用`dict()`函数来创建字典
+
+在使用花括号语法创建字典时，花括号中应包含多个键值对，`key`与`value`之间用英文冒号隔开，多个键值对之间用英文逗号隔开，例如：
+
+```python
+dict1 = {"key1": "value1", "key2": "value2"}
+```
+**需要指出的是，元组可以作为`dict`的`key`，但列表不能作为`dict`的`key`，这是由于`dict`要求`key`必须是不可变类型，由于列表是可变的，因此列表不能作为`dict`的`key`**
+
+在使用`dict()`函数创建字典时，可以传入多个列表或元组参数作为键值对，每个列表或元组将被当成一个键值对，因此这些列表或元组都只能包含两个元素，例如：
+
+```python
+list1 = [("key1", "value1"), ("key2", "value2"), ("key3", "value3")]
+dict1 = dict(list1)
+print(dict1)
+
+list2 = [["key4", "value4"], ["key5", "value5"], ["key6", "value6"]]
+dict2 = dict(list2)
+print(dict2)
+```
+执行结果为
+```
+>>> {"key1": "value1", "key2": "value2", "key3": "value3"}
+>>> {"key4": "value4", "key5": "value5", "key6": "value6"}
+```
+
+如果不为`dict()`函数传入任何参数，则代表创建一个空字典，例如：
+```python
+dict1 = dict()
+print(dict1)
+```
+执行结果为
+```
+>>> {}
+```
+
+还可通过为`dict()`指定关键参数创建字典，此时字典的`key`不允许使用表达式，例如：
+```python
+dict1 = dict(key1="value1", key2="value2")
+print(dict1)
+```
+执行结果为
+```
+>>> {"key1": "value1", "key2": "value2"}
+```
+
+> 通过`key`访问`value`
+
+使用方括号语法访问不存在的`key`时，字典会引发`KeyError`错误
+
+使用`get()`方法访问不存在的`key`，该方法会简单的返回`None`，不会导致错误
+
+```python
+dict1 = {"key1": "value1", "key2": "value2"}
+print(dict1["key1"])
+print(dict1.get("key1"))
+print(dict1.get("key3"))
+```
+执行结果为
+```
+>>> value1
+>>> value1
+>>> None
+```
+
+> 通过`key`添加键值对
+
+只需为不存在的`key`赋值即可
+
+```python
+dict1 = {"key1": "value1"}
+dict1["key2"] = "value2"
+print(dict1)
+```
+执行结果为
+```
+>>> {"key1": "value1", "key2": "value2"}
+```
+
+> 通过`key`删除键值对
+
+可使用`del`
+
+```python
+dict1 = {"key1": "value1", "key2": "value2"}
+del dict1["key2"]
+print(dict1)
+```
+执行结果为
+```
+>>> {"key1": "value1"}
+```
+
+> 通过`key`修改键值对
+
+只需对字典中存在的`key`赋值，新赋的值会覆盖原有的值
+```python
+dict1 = {"key1": "value1"}
+dict1["key1"] = "value2"
+print(dict1)
+```
+执行结果为
+```
+>>> {"key1": "value2"}
+```
+
+> 通过`key`判断指定键值对是否存在
+
+如果要判断字典是否包含指定的`key`，则可以使用`in`或`not in`运算符，需要指出的是，对于字典而言，`in`或`not in`运算符都是基于`key`来判断的，例如：
+```python
+dict1 = {"key1": "value1", "key2": "value2"}
+print("key1" in dict1)
+print("key1" not in dict1)
+print("key3" in dict1)
+print("key3" not in dict1)
+```
+执行结果为
+```
+>>> True
+>>> False
+>>> False
+>>> True
+```
+
+## 数据转换
